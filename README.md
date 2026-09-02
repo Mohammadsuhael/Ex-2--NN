@@ -60,10 +60,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-```
 
-
-```
 # Write a class for perceptron with fit and predict function with sigmoid activation function
 
 class Perceptron:
@@ -90,8 +87,7 @@ class Perceptron:
 
   def predict(self, x: np.array):
     return np.where(self.f(x) >= 0, 1, -1)
-```
-```
+
 # Start your main here ,read the iris data set
 
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
@@ -100,8 +96,7 @@ print(df.head())
 
 y = df.iloc[:, 4].values
 x = df.iloc[:, 0:3].values
-```
-```
+
 fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.set_title('Iris data set')
@@ -117,8 +112,7 @@ ax.scatter(x[100:150, 0], x[100:150, 1], x[100:150, 2], color='green',
          marker='x', s=4, edgecolor='green', label="Iris Virginica")
 plt.legend(loc='upper left')
 plt.show()
-```
-```
+
 x = x[0:100, 0:2] 
 y = y[0:100]
 
@@ -130,8 +124,6 @@ plt.ylabel("Petal length")
 plt.legend(loc='upper left')
 plt.show()
 
-```
-```
 # split the data
 y = np.where(y == 'Iris-setosa', 1, -1)
 x[:, 0] = (x[:, 0] - x[:, 0].mean()) / x[:, 0].std()
@@ -145,9 +137,7 @@ classifier.fit(x_train, y_train)
 # print the accuracy
 print("accuracy", accuracy_score(classifier.predict(x_test), y_test)*100)
 
-```
 
-```
 # plot the number of errors during each iteration
 
 plt.plot(range(1, len(classifier.misclassified_samples) + 1),classifier.misclassified_samples, marker='o')
