@@ -168,4 +168,41 @@ plt.show()
 # RESULT:
  Thus, a single layer perceptron model is implemented using python to classify Iris data set.
 
- 
+ ```
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+class Perceptron:
+    def __init__(self,lr=.01): self.lr=lr
+    def fit(self,X,y,n=10):
+        self.w=np.zeros(X.shape[1]); self.b=0
+        for _ in range(n):
+            for x,t in zip(X,y):
+                e=self.lr*(t-self.predict(x))
+                self.w+=e*x; self.b+=e
+    def predict(self,X):
+        return np.where(X@self.w+self.b>=0,1,-1)
+
+d=load_iris()
+X=d.data[:100,:2]
+y=np.where(d.target[:100]==0,1,-1)
+
+X=(X-X.mean(0))/X.std(0)
+Xtr,Xte,ytr,yte=train_test_split(X,y,test_size=.25,random_state=0)
+
+p=Perceptron()
+p.fit(Xtr,ytr)
+
+print("Accuracy:",accuracy_score(yte,p.predict(Xte))*100,"%")
+
+plt.scatter(X[y==1,0],X[y==1,1],label="Setosa")
+plt.scatter(X[y==-1,0],X[y==-1,1],label="Versicolor")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.title("Perceptron Classification")
+plt.legend()
+plt.show()
+```
